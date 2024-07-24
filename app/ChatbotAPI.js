@@ -34,8 +34,6 @@ function act(message, state) {
             return buildResponseAndState("Jetzt sag schon!; Ja oder nein?", {angerLevel: 0});
         }
     } else if (baseState === 'parting') {
-        return buildResponseAndState("asd", {baseState: 'final'});
-    } else if (baseState === 'final') {
         return buildResponseAndState("Keine Antwort...", {}); // TODO
     } else {
         return buildResponseAndState("Error: unknown state...", {});
