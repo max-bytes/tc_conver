@@ -12,7 +12,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content"></meta> {/* required to not push content out of screen when keyboard opens on mobile */}
+         {/* required to not push content out of screen when keyboard opens on mobile */}
+        <meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content"></meta>
       </head>
       <body className={inter.className}>{children}</body>
     </html>
