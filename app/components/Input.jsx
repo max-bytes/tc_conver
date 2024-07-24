@@ -13,20 +13,20 @@ export default function Input({ onSend }) {
     setText("");
   };
 
-  const inputRef = useRef(null);
-  useEffect(() => {
-    inputRef.current.focus();
-  }, []);
+//   const inputRef = useRef(null);
+//   useEffect(() => {
+//     inputRef.current.focus();
+//   }, []);
+    //   ref={inputRef}
 
   return (
     <div className="input">
       <form onSubmit={handleSend}>
         <input 
-          ref={inputRef}
           type="text"
           onChange={handleInputChange}
           value={text}
-          placeholder="Enter your message here"
+          placeholder="Text hier eingeben"
         />
         <button>
           <svg
