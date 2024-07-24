@@ -28,8 +28,13 @@ body {
   display: flex;
   flex-direction: column;
   padding: 10px 0px;
-  justify-content: flex-end;
 }
+
+/* CSS sucks: https://stackoverflow.com/questions/36130760/use-justify-content-flex-end-and-to-have-vertical-scrollbar */
+.messages :first-child {
+  margin-top: auto;
+}
+
 
 .message-container {
   width: 100%;
