@@ -1,41 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-
   position: absolute;
   left: 0px;
   right: 0px;
   top: 0px;
   bottom: 0px;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
 }
 
 .chatbot {
@@ -51,16 +19,6 @@ body {
   display: flex;
   flex-flow: column;
   overflow: hidden;
-}
-
-.header {
-  padding: 20px;
-  text-align: center;
-  color: rgb(255, 255, 255);
-  max-height: 58px;
-  font-size: 16px;
-  font-weight: bold;
-  background-color: #002f50;
 }
 
 .messages {
@@ -115,7 +73,7 @@ body {
   outline: none;
   padding: 16px 52px 16px 10px;
   width: 100%;
-  -webkit-appearance: none;
+  /* -webkit-appearance: none; */
 }
 
 .input > form > input:focus {
