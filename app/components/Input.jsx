@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 
 export default function Input({ onSend }) {
   const [text, setText] = useState("");
@@ -9,20 +9,25 @@ export default function Input({ onSend }) {
 
   const handleSend = e => {
     e.preventDefault();
-    onSend(text);
-    setText("");
+    if (text !== "") {
+        onSend(text);
+        setText("");
+        if (inputRef.current)
+            inputRef.current.focus();
+    }
   };
 
-//   const inputRef = useRef(null);
+  const inputRef = useRef(null);
 //   useEffect(() => {
 //     inputRef.current.focus();
 //   }, []);
-    //   ref={inputRef}
+    //   
 
   return (
     <div className="input">
       <form onSubmit={handleSend}>
         <input 
+          ref={inputRef}
           type="text"
           onChange={handleInputChange}
           value={text}
