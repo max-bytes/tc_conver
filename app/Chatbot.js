@@ -7,56 +7,57 @@ import UserMessage from "./components/UserMessage";
 import Messages from "./components/Messages";
 import Input from "./components/Input";
 import API from "./ChatbotAPI";
+import SystemMessage from "./components/SystemMessage";
 
 function* interact(userMessage, chatbotState, setChatbotState) {
-    if (chatbotState.isStillTalking)
-        return;
-    let newChatbotState = {...chatbotState, isStillTalking: true};
-    setChatbotState(newChatbotState);
+    let newChatbotState = chatbotState;
     let response = null;
-    for([response, newChatbotState] of API.GetChatbotResponse(userMessage, newChatbotState))
+    let isSystemMessage = false;
+    for([response, newChatbotState, isSystemMessage] of API.GetChatbotResponse(userMessage, newChatbotState))
     {
         setChatbotState(newChatbotState);
-        yield response;
+        yield [response, isSystemMessage];
     }
-    setChatbotState({...newChatbotState, isStillTalking: false});
 }
 
 export default function Chatbot() {
   const [messages, setMessages] = useState([]);
   const [chatbotState, setChatbotState] = useState({});
-
-//   useEffect(() => {
-//     async function loadWelcomeMessage() {
-//       setMessages([
-//         <BotMessage
-//           key="0"
-//           fetchMessage={async () => await interact("", chatbotState, setChatbotState)}
-//         />
-//       ]);
-//     }
-//     loadWelcomeMessage();
-//   }, []);
+  const [isBotTalking, setIsBotTalking] = useState(false);
 
   const send = useCallback(async text => {
     setMessages(messages => messages.concat(<UserMessage key={messages.length + 1} text={text} />));
 
-    const responses = interact(text, chatbotState, setChatbotState);
+    if (isBotTalking)
+      return;
+    setIsBotTalking(true);
 
-    for(const response of responses) {
-        setMessages(messages => messages.concat(<BotMessage
-            key={messages.length + 1}
-            fetchMessage={async () => await new Promise(function(resolve, reject) { setTimeout(function() { return resolve(response); }, 1000); })}
-        />));
+    const responses = interact(text, chatbotState, setChatbotState);
+    
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    for(const [text, isSystemMessage] of responses) {
+
+        let message;
+        if (isSystemMessage) {
+          message = <SystemMessage key={messages.length + 1} message={text} />;
+        } else {
+          message = <BotMessage key={messages.length + 1}
+              fetchMessage={async () => await new Promise(function(resolve, reject) { setTimeout(function() { return resolve(text); }, 1000); })}
+          />;
+        }
+
+        setMessages(messages => messages.concat(message));
 
         // TODO: do not wait after last message
         await new Promise(resolve => setTimeout(resolve, 1500));
     }
-  }, [chatbotState, setChatbotState, setMessages]);
+    setIsBotTalking(false);
+
+  }, [chatbotState, setChatbotState, setMessages, isBotTalking, setIsBotTalking]);
 
   return (
     <div className="chatbot">
-      {/* <Header /> */}
       <Messages messages={messages} />
       <Input onSend={send} />
     </div>

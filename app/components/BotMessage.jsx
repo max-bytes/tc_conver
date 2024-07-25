@@ -14,8 +14,11 @@ export default function BotMessage({ fetchMessage }) {
   }, [fetchMessage]);
 
   return (
-    <div className="message-container">
-      <div className="bot-message">{isLoading ? "..." : message}</div>
+    <div className="message-container-bot">
+      <img className="bot-avatar" src="/emuAvatar.png"></img>
+      <div className="bot-message">
+        {isLoading ? "..." : <><span className="name">EMU Agent</span>{message}</>}
+      </div>
     </div>
   );
 }
