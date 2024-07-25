@@ -8,12 +8,14 @@ import Messages from "./components/Messages";
 import Input from "./components/Input";
 import API from "./ChatbotAPI";
 import SystemMessage from "./components/SystemMessage";
+import { useSearchParams } from 'next/navigation'
+import { act_tc_virus_1, act_tc_virus_2, act_tc_invalid_dialog } from './Bots'
 
-function* interact(userMessage, chatbotState, setChatbotState) {
+function* interact(userMessage, chatbotState, setChatbotState, act) {
     let newChatbotState = chatbotState;
     let response = null;
     let isSystemMessage = false;
-    for([response, newChatbotState, isSystemMessage] of API.GetChatbotResponse(userMessage, newChatbotState))
+    for([response, newChatbotState, isSystemMessage] of API.GetChatbotResponse(userMessage, newChatbotState, act))
     {
         setChatbotState(newChatbotState);
         yield [response, isSystemMessage];
@@ -25,6 +27,15 @@ export default function Chatbot() {
   const [chatbotState, setChatbotState] = useState({});
   const [isBotTalking, setIsBotTalking] = useState(false);
 
+  const searchParams = useSearchParams();
+  const dialog = searchParams.get('dialog') ?? '';
+
+  let act = act_tc_invalid_dialog;
+  if (dialog === 'tc_virus_1')
+    act = act_tc_virus_1;
+  else if (dialog === 'tc_virus_2')
+    act = act_tc_virus_2;
+
   const send = useCallback(async text => {
     setMessages(messages => messages.concat(<UserMessage key={messages.length + 1} text={text} />));
 
@@ -32,7 +43,7 @@ export default function Chatbot() {
       return;
     setIsBotTalking(true);
 
-    const responses = interact(text, chatbotState, setChatbotState);
+    const responses = interact(text, chatbotState, setChatbotState, act);
     
     await new Promise(resolve => setTimeout(resolve, 1000));
 
@@ -52,7 +63,7 @@ export default function Chatbot() {
     }
     setIsBotTalking(false);
 
-  }, [chatbotState, setChatbotState, setMessages, isBotTalking, setIsBotTalking]);
+  }, [chatbotState, setChatbotState, setMessages, isBotTalking, setIsBotTalking, act]);
 
   return (
     <div className="chatbot">
