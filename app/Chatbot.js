@@ -36,18 +36,16 @@ export default function Chatbot() {
     
     await new Promise(resolve => setTimeout(resolve, 1000));
 
+    function createMessage(text, isSystemMessage, key) {
+      if (isSystemMessage) {
+        return <SystemMessage key={key} message={text} />;
+      } else {
+        return <BotMessage key={key} fetchMessage={async () => await new Promise(function(resolve, reject) { setTimeout(function() { return resolve(text); }, 1000); })}/>;
+      }
+    }
+
     for(const [text, isSystemMessage] of responses) {
-
-        let message;
-        if (isSystemMessage) {
-          message = <SystemMessage key={messages.length + 1} message={text} />;
-        } else {
-          message = <BotMessage key={messages.length + 1}
-              fetchMessage={async () => await new Promise(function(resolve, reject) { setTimeout(function() { return resolve(text); }, 1000); })}
-          />;
-        }
-
-        setMessages(messages => messages.concat(message));
+        setMessages(messages => messages.concat(createMessage(text, isSystemMessage, messages.length + 1)));
 
         // TODO: do not wait after last message
         await new Promise(resolve => setTimeout(resolve, 1500));

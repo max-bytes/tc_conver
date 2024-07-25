@@ -18,6 +18,7 @@ export default function BotMessage({ fetchMessage }) {
     <div className="message-container-bot">
       <Image className="bot-avatar"
         src="/tc_chatbot/emuAvatar.png"
+        alt="Avatar of Bot"
         width={48}
         height={48}
       />

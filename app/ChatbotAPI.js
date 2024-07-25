@@ -1,15 +1,5 @@
 
-function* act(message, state) {
-
-    let newState = state;
-    function response(res, s = {}, isSystemMessage = false) {
-        newState = {...newState, ...s}
-        return [res, newState, isSystemMessage];
-    };
-    function responseSystem(res, s = {}) {
-        return response(res, s, true);
-    };
-
+function* act(message, state, response, responseSystem) {
     if (!state.baseState) {
         yield responseSystem("EMU Agent hat den Chat betreten.");
         yield response("Hey!");
@@ -20,10 +10,9 @@ function* act(message, state) {
         if (message.includes("123456")) {
             yield response("Ok, ich schätze mal, du bist beim letzten Trupp dabei, der die Spuren verwischt, ja?", {baseState: 'traces', angerLevel: 0});
         } else {
-            const angerLevel = state.angerLevel ?? 0;
-            if (angerLevel === 0)
+            if (!state.angerLevel)
                 yield response("Nein, deine ID will ich!", {angerLevel: 1});
-            else if (angerLevel === 1)
+            else if (state.angerLevel === 1)
                 yield response("Jetzt sag schon, keine Zeit für Scherze!", {angerLevel: 2});
             else
                 yield response("Langsam verlier ich die Geduld… Was ist deine ID???", {angerLevel: 0});
@@ -34,8 +23,7 @@ function* act(message, state) {
             yield response("Passt gut. Dann schau mal rüber zum Posten im Gebüsch vor der Adresse Kaiserfeldgasse 12, dort müsste noch eine Chemikalie als Backup hinterlegt sein. Der Code für den Tresor ist 1111.", {baseState: 'parting', angerLevel: 0});
             yield responseSystem("EMU Agent hat den Chat verlassen.");
         } else {
-            const angerLevel = state.angerLevel ?? 0;
-            if (angerLevel === 0)
+            if (!state.angerLevel)
                 yield response("Das ist dein Job, oder?", {angerLevel: 1});
             else
                 yield response("Jetzt sag schon!; Ja oder nein?", {angerLevel: 0});
@@ -49,7 +37,15 @@ function* act(message, state) {
 
 const API = {
     GetChatbotResponse: (message, state) => {
-        return act(message ?? '', state);
+        var newState = state;
+        function response(res, s = {}, isSystemMessage = false) {
+            newState = {...newState, ...s}
+            return [res, newState, isSystemMessage];
+        };
+        function responseSystem(res, s = {}) {
+            return response(res, s, true);
+        };
+        return act(message ?? '', newState, response, responseSystem);
     }
   };
   
