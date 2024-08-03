@@ -25,7 +25,7 @@ body {
   flex-direction: column;
   padding: 10px 0px;
   background-color: #45464b;
-  background-image: url('/tc_chatbot/circuitDark.png')
+  background-image: url('/tc_conver/circuitDark.png')
 }
 
 /* CSS sucks: https://stackoverflow.com/questions/36130760/use-justify-content-flex-end-and-to-have-vertical-scrollbar */

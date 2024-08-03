@@ -9,7 +9,7 @@ export default function UserMessage({ text }) {
         {text}
       </div>
       <Image className="user-avatar"
-        src="/tc_chatbot/userAvatar.png"
+        src="/tc_conver/userAvatar.png"
         alt="Avatar of User"
         width={48}
         height={48}

@@ -7,7 +7,7 @@ export function* act_tc_virus_1(message, state, response, responseSystem) {
         yield response("Wer bist du??");
         yield response("Was ist deine ID?", {baseState: 'your_id'});
     } else if (state.baseState === 'your_id') {
-        if (message.includes("123456")) {
+        if (message.toLowerCase().includes("840501")) {
             yield response("Ok, ich schätze mal, du bist beim letzten Trupp dabei, der die Spuren verwischt, ja?", {baseState: 'traces', angerLevel: 0});
         } else {
             if (!state.angerLevel)
@@ -22,7 +22,7 @@ export function* act_tc_virus_1(message, state, response, responseSystem) {
         if (yesRegex.test(message) || message === 'j' || message === 'k' || message === 'y') {
             yield response("Passt gut.");
             yield response("Dann schau mal rüber zum Posten im Gebüsch vor der Adresse Kaiserfeldgasse 12, dort müsste noch eine Chemikalie als Backup hinterlegt sein.");
-            yield response("Der Code für den Tresor ist 1111.", {baseState: 'parting', angerLevel: 0});
+            yield response("Der Code für den Tresor ist 1122.", {baseState: 'parting', angerLevel: 0});
             yield responseSystem("EMU Agent hat den Chat verlassen.");
         } else {
             if (!state.angerLevel)
@@ -39,7 +39,7 @@ export function* act_tc_virus_1(message, state, response, responseSystem) {
 
 export function* act_tc_virus_2(message, state, response, responseSystem) {
     if (!state.baseState) {
-        if (message.includes("posten")) {
+        if (message.toLowerCase().includes("posten")) {
             yield response("Einen Posten suchst du?");
             yield response("Wow und ich dachte, von uns ist niemand mehr im Stadtzentrum, jetzt wo die Show losgeht.");
             yield response("Hast du schon irgendeinen Posten gesichert?", {baseState: 'posten', angerLevel: 0});
@@ -47,9 +47,9 @@ export function* act_tc_virus_2(message, state, response, responseSystem) {
             yield responseSystem("Keine Antwort. Versuche es mit einer anderen Nachricht!");
         }
     } else if (state.baseState === 'posten') {
-        if (message.includes("kaiser")) {
+        if (message.toLowerCase().includes("kaiser")) {
             yield response("Alles klar, dann sichere noch die Chemikalie beim Posten vor Joanneumring 12.");
-            yield response("Der Code ist 2222. Die anderen sind unwichtig, sobald unser Plan richtig läuft", {baseState: 'parting', angerLevel: 0});
+            yield response("Der Code ist 2229. Die anderen sind unwichtig, sobald unser Plan richtig läuft", {baseState: 'parting', angerLevel: 0});
             yield responseSystem("EMU Agent hat den Chat verlassen.");
         } else {
             if (!state.angerLevel)

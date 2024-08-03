@@ -31,9 +31,9 @@ export default function Chatbot() {
   const dialog = searchParams.get('dialog') ?? '';
 
   let act = act_tc_invalid_dialog;
-  if (dialog === 'tc_virus_1')
+  if (dialog === 'avir')
     act = act_tc_virus_1;
-  else if (dialog === 'tc_virus_2')
+  else if (dialog === 'bvir')
     act = act_tc_virus_2;
 
   const send = useCallback(async text => {
