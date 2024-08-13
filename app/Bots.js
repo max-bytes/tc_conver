@@ -21,7 +21,7 @@ export function* act_tc_virus_1(message, state, response, responseSystem) {
         var yesRegex = new RegExp(['ja', 'yes', 'ok'].join( "|" ), "i");
         if (yesRegex.test(message) || message === 'j' || message === 'k' || message === 'y') {
             yield response("Passt gut.");
-            yield response("Dann schau mal rüber zum Posten im Gebüsch vor der Adresse Kaiserfeldgasse 12, dort müsste noch eine Chemikalie als Backup hinterlegt sein.");
+            yield response("Dann schau mal rüber zum Posten bei der kleinen Grünfläche vor dem Eingang zu Kaiserfeldgasse 29, dort müsste noch eine Chemikalie als Backup hinterlegt sein.");
             yield response("Der Code für den Tresor ist 1122.", {baseState: 'parting', angerLevel: 0});
             yield responseSystem("EMU Agent hat den Chat verlassen.");
         } else {
@@ -48,8 +48,8 @@ export function* act_tc_virus_2(message, state, response, responseSystem) {
         }
     } else if (state.baseState === 'posten') {
         if (message.toLowerCase().includes("kaiser")) {
-            yield response("Alles klar, dann sichere noch die Chemikalie beim Posten vor Joanneumring 12.");
-            yield response("Der Code ist 2229. Die anderen sind unwichtig, sobald unser Plan richtig läuft", {baseState: 'parting', angerLevel: 0});
+            yield response("Alles klar, dann sichere noch die Chemikalie beim Posten gegenüber von der Adresse Am Eisernen Tor 5");
+            yield response("Der Code ist 2229. Du weißt schon, bei dem riesigen Rahmen mit dem weißen Panther drüber. Die anderen sind unwichtig, sobald unser Plan richtig läuft", {baseState: 'parting', angerLevel: 0});
             yield responseSystem("EMU Agent hat den Chat verlassen.");
         } else {
             if (!state.angerLevel)
