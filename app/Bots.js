@@ -7,7 +7,7 @@ export function* act_tc_virus_1(message, state, response, responseSystem) {
         yield response("Wer bist du??");
         yield response("Was ist deine ID?", {baseState: 'your_id'});
     } else if (state.baseState === 'your_id') {
-        if (message.toLowerCase().includes("840501")) {
+        if (message.toLowerCase().includes("840501") || message.toLowerCase().includes("850501")) {
             yield response("Ok, ich schätze mal, du bist beim letzten Trupp dabei, der die Spuren verwischt, ja?", {baseState: 'traces', angerLevel: 0});
         } else {
             if (!state.angerLevel)
