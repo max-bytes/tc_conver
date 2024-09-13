@@ -9,7 +9,7 @@ import Input from "./components/Input";
 import API from "./ChatbotAPI";
 import SystemMessage from "./components/SystemMessage";
 import { useSearchParams } from 'next/navigation'
-import { act_tc_virus_1, act_tc_virus_2, act_tc_invalid_dialog } from './Bots'
+import { act_tc_virus_1, act_tc_virus_2, act_tc_virus_21, act_tc_invalid_dialog } from './Bots'
 
 function* interact(userMessage, chatbotState, setChatbotState, act) {
     let newChatbotState = chatbotState;
@@ -35,6 +35,8 @@ export default function Chatbot() {
     act = act_tc_virus_1;
   else if (dialog === 'bvir')
     act = act_tc_virus_2;
+  else if (dialog === '21a')
+    act = act_tc_virus_21;
 
   const send = useCallback(async text => {
     setMessages(messages => messages.concat(<UserMessage key={messages.length + 1} text={text} />));
