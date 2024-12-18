@@ -9,7 +9,11 @@ import Input from "./components/Input";
 import API from "./ChatbotAPI";
 import SystemMessage from "./components/SystemMessage";
 import { useSearchParams } from 'next/navigation'
-import { act_tc_virus_1, act_tc_virus_2, act_tc_virus_21a, act_tc_virus_33a, act_tc_virus_44a, act_tc_virus_55a, act_tc_invalid_dialog } from './Bots'
+import { 
+  act_tc_virus_1, act_tc_virus_2, act_tc_virus_21a, act_tc_virus_33a, act_tc_virus_44a, act_tc_virus_55a, 
+  act_tc_invalid_dialog,
+  act_tc_virus_e1, act_tc_virus_e2, act_tc_virus_e21a, act_tc_virus_e33a, act_tc_virus_e44a, act_tc_virus_e55a, 
+ } from './Bots'
 
 function* interact(userMessage, chatbotState, setChatbotState, act) {
     let newChatbotState = chatbotState;
@@ -43,6 +47,18 @@ export default function Chatbot() {
     act = act_tc_virus_44a;
   else if (dialog === '55a')
     act = act_tc_virus_55a;
+  else if (dialog === 'e1')
+    act = act_tc_virus_e1;
+  else if (dialog === 'e2')
+    act = act_tc_virus_e2;
+  else if (dialog === 'e21a')
+    act = act_tc_virus_e21a;
+  else if (dialog === 'e33a')
+    act = act_tc_virus_e33a;
+  else if (dialog === 'e44a')
+    act = act_tc_virus_e44a;
+  else if (dialog === 'e55a')
+    act = act_tc_virus_e55a;
 
   const send = useCallback(async text => {
     setMessages(messages => messages.concat(<UserMessage key={messages.length + 1} text={text} />));
