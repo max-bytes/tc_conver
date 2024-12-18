@@ -361,7 +361,7 @@ export function* act_tc_virus_e33a(message, state, response, responseSystem) {
             yield response("OK");
             yield response("Then secure the chemical at the building on the corner Hamerlinggasse/Opernring");
             yield response("The code for the safe is 3334");
-            yield response("You know, the one attached to the huge metal frame with the white panther on top. The others are unimportant as soon as our plan gets going", {baseState: 'parting', angerLevel: 0});
+            yield response("You know, on the window grill by the rain gutter towards the Rosarium fountain!", {baseState: 'parting', angerLevel: 0});
             yield responseSystem("EMU agent has left the chat.");
         } else {
             if (!state.angerLevel)

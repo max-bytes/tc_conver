@@ -59,6 +59,10 @@ export default function Chatbot() {
     act = act_tc_virus_e44a;
   else if (dialog === 'e55a')
     act = act_tc_virus_e55a;
+  
+  let english = false;
+  if (dialog.startsWith('e'))
+    english = true;
 
   const send = useCallback(async text => {
     setMessages(messages => messages.concat(<UserMessage key={messages.length + 1} text={text} />));
@@ -92,7 +96,7 @@ export default function Chatbot() {
   return (
     <div className="chatbot">
       <Messages messages={messages} />
-      <Input onSend={send} />
+      <Input onSend={send} english={english} />
     </div>
   );
 }

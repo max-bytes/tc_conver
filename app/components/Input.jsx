@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 
-export default function Input({ onSend }) {
+export default function Input({ onSend, english }) {
   const [text, setText] = useState("");
 
   const handleInputChange = e => {
@@ -31,7 +31,7 @@ export default function Input({ onSend }) {
           type="text"
           onChange={handleInputChange}
           value={text}
-          placeholder="Text hier eingeben"
+          placeholder={english ? "Your message" : "Text hier eingeben"}
         />
         <button>
           <svg
