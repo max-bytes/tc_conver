@@ -65,7 +65,7 @@ export default function Chatbot() {
     english = true;
 
   const send = useCallback(async text => {
-    setMessages(messages => messages.concat(<UserMessage key={messages.length + 1} text={text} />));
+    setMessages(messages => messages.concat(<UserMessage key={messages.length + 1} text={text} me={(english ? 'Me' : 'Ich')} />));
 
     if (isBotTalking)
       return;

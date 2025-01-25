@@ -1,11 +1,11 @@
 import React from "react";
 import Image from 'next/image'
 
-export default function UserMessage({ text }) {
+export default function UserMessage({ text, me }) {
   return (
     <div className="message-container-user">
       <div className="user-message">
-        <span className="name">Ich</span>
+        <span className="name">{me}</span>
         {text}
       </div>
       <Image className="user-avatar"
