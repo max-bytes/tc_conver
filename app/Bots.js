@@ -475,7 +475,37 @@ export function* act_tc_virus_12b(message, state, response, responseSystem) {
             else if (state.angerLevel === 1)
                 yield response("Wie hieß die Straße oder der Platz oder so?", {angerLevel: 2});
             else
-                yield response("Du wirst doch wohl irgendwas  wissen?!", {angerLevel: 0});
+                yield response("Du wirst doch wohl irgendwas wissen?!", {angerLevel: 0});
+        }
+    } else if (state.baseState === 'parting') {
+        // yield response("Keine Antwort...", {});
+    } else {
+        yield response("Error: unknown state...", {});
+    }
+}
+
+export function* act_tc_virus_22b(message, state, response, responseSystem) {
+    if (!state.baseState) {
+        if (message.toLowerCase().includes("posten")) {
+            yield response("Einen Posten suchst du?");
+            yield response("Wow und ich dachte, von uns ist niemand mehr im Stadtzentrum, jetzt wo die Show losgeht.");
+            yield response("Hast du schon irgendeinen Posten gesichert?", {baseState: 'posten', angerLevel: 0});
+        } else {
+            yield responseSystem("Keine Antwort. Versuche es mit einer anderen Nachricht!");
+        }
+    } else if (state.baseState === 'posten') {
+        if (message.toLowerCase().includes("oper") || message.toLowerCase().includes("hamerling") || message.toLowerCase().includes("hammer") || message.toLowerCase().includes("ecke")) {
+            yield response("Alles klar, dann sichere noch die Chemikalie beim Posten gegenüber bei der Adresse Kalchberggasse 10. ");
+            yield response("Der Code ist 4445.");
+            yield response("Du weißt schon, am Gitter links vom Eingang!", {baseState: 'parting', angerLevel: 0});
+            yield responseSystem("EMU Agent hat den Chat verlassen.");
+        } else {
+            if (!state.angerLevel)
+                yield response("Bräuchte eine ungefähre Adresse", {angerLevel: 1});
+            else if (state.angerLevel === 1)
+                yield response("Wie hieß die Straße oder der Platz oder so?", {angerLevel: 2});
+            else
+                yield response("Du wirst doch wohl irgendwas wissen?!", {angerLevel: 0});
         }
     } else if (state.baseState === 'parting') {
         // yield response("Keine Antwort...", {});
