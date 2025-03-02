@@ -453,3 +453,33 @@ export function* act_tc_virus_e55a(message, state, response, responseSystem) {
         yield response("Error: unknown state...", {});
     }
 }
+
+export function* act_tc_virus_12b(message, state, response, responseSystem) {
+    if (!state.baseState) {
+        if (message.toLowerCase().includes("posten")) {
+            yield response("Einen Posten suchst du?");
+            yield response("Wow und ich dachte, von uns ist niemand mehr im Stadtzentrum, jetzt wo die Show losgeht.");
+            yield response("Hast du schon irgendeinen Posten gesichert?", {baseState: 'posten', angerLevel: 0});
+        } else {
+            yield responseSystem("Keine Antwort. Versuche es mit einer anderen Nachricht!");
+        }
+    } else if (state.baseState === 'posten') {
+        if (message.toLowerCase().includes("tor") || message.toLowerCase().includes("eis")) {
+            yield response("Alles klar, dann schau mal rüber zum Posten bei der kleinen Grünfläche vor dem Eingang zu Kaiserfeldgasse 29.");
+            yield response("Dort müsste noch eine Chemikalie als Backup hinterlegt sein.");
+            yield response("Der Code ist 1122.", {baseState: 'parting', angerLevel: 0});
+            yield responseSystem("EMU Agent hat den Chat verlassen.");
+        } else {
+            if (!state.angerLevel)
+                yield response("Bräuchte eine ungefähre Adresse", {angerLevel: 1});
+            else if (state.angerLevel === 1)
+                yield response("Wie hieß die Straße oder der Platz oder so?", {angerLevel: 2});
+            else
+                yield response("Du wirst doch wohl irgendwas  wissen?!", {angerLevel: 0});
+        }
+    } else if (state.baseState === 'parting') {
+        // yield response("Keine Antwort...", {});
+    } else {
+        yield response("Error: unknown state...", {});
+    }
+}
