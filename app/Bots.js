@@ -36,6 +36,8 @@ export function pick_dialog(dialog) {
         return act_tc_jus_1Moot_BR_e2;
     else if (dialog === '1Institut_BR-h2')
         return act_tc_jus_1Institut_BR_h2;
+    else if (dialog === '2Institut_BR-h1')
+        return act_tc_jus_2Institut_BR_h1;
     else
         return act_tc_invalid_dialog;
 }
@@ -608,4 +610,40 @@ function* act_tc_jus_1Moot_BR_e2(message, state, response, responseSystem) {
 
 function* act_tc_jus_1Institut_BR_h2(message, state, response, responseSystem) {
     yield* act_tc_jus_base_1(message, state, response, responseSystem, "Dann schau mal rüber zum Elektronischen Kommunikationsterminal im Institut für Öffentliches Recht und Politikwissenschaft (RESOWI, Bauteil C, 3. Stock)", "Aber achte UNBEDINGT auf die richtige Seriennummer: #77521");
+}
+
+
+function* act_tc_jus_base_2(message, state, response, responseSystem, parting1, parting2) {
+    if (!state.baseState) {
+        if (message.toLowerCase().includes("elektro") || message.toLowerCase().includes("terminal") || message.toLowerCase().includes("komm")) {
+            yield response("Du schon wieder...");
+            yield response("Ein elektronisches Kommunikationsterminal suchst du?");
+            yield response("Kommst mir verdächtig vor… Weiß nicht, ob ich dir trauen kann");
+            yield response("Ich werd dich mal testen");
+            yield response("Wenn du einer von uns bist, musst du ja die Anwort auf das alte Rätsel kennen, mit dem der Boss immer die Neulinge testet");
+            yield response("\"Muss Tag und Nacht auf Wache stehn, hat keine Füße und muss doch gehn, hat keine Hände und muss doch schlagen - Wer kann mir dieses Rätsel sagen?\"", {baseState: 'posten', angerLevel: 0});
+        } else {
+            yield responseSystem("Keine Antwort. Versuche es mit einer anderen Nachricht!");
+        }
+    } else if (state.baseState === 'posten') {
+        if (message.toLowerCase().includes("uhr")) {
+            yield response("Haha, ja genau! Ich lieb das Rätsel");
+            yield response(parting1);
+            yield response(parting2, {baseState: 'parting', angerLevel: 0});
+            yield responseSystem("EMU Agent hat den Chat verlassen.");
+        } else {
+            if (!state.angerLevel)
+                yield response("Hey, mach dich nicht verdächtig! Denk lieber nochmal nach", {angerLevel: 1});
+            else
+                yield response("Das ist kein Spaß! Sag's mir lieber!", {angerLevel: 0});
+        }
+    } else if (state.baseState === 'parting') {
+        // yield response("Keine Antwort...", {});
+    } else {
+        yield response("Error: unknown state...", {});
+    }
+}
+
+function* act_tc_jus_2Institut_BR_h1(message, state, response, responseSystem) {
+    yield* act_tc_jus_base_2(message, state, response, responseSystem, "Na gut, dann schau mal rüber zum Elektronischen Kommunikationsterminal im Institut für Öffentliches Recht und Politikwissenschaft (RESOWI, Bauteil C, 3. Stock)", "Aber achte UNBEDINGT auf die richtige Seriennummer: #55697");
 }
