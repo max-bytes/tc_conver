@@ -1,5 +1,40 @@
 
-export function* act_tc_virus_1(message, state, response, responseSystem) {
+export function pick_dialog(dialog, invalid_dialog) {
+    if (dialog === 'avir')
+        return act_tc_virus_1;
+    else if (dialog === 'bvir')
+        return act_tc_virus_2;
+    else if (dialog === '21a')
+        return act_tc_virus_21a;
+    else if (dialog === '33a')
+        return act_tc_virus_33a;
+    else if (dialog === '44a')
+        return act_tc_virus_44a;
+    else if (dialog === '55a')
+        return act_tc_virus_55a;
+    else if (dialog === 'e1')
+        return act_tc_virus_e1;
+    else if (dialog === 'e2')
+        return act_tc_virus_e2;
+    else if (dialog === 'e21a')
+        return act_tc_virus_e21a;
+    else if (dialog === 'e33a')
+        return act_tc_virus_e33a;
+    else if (dialog === 'e44a')
+        return act_tc_virus_e44a;
+    else if (dialog === 'e55a')
+        return act_tc_virus_e55a;
+    else if (dialog === '12b')
+        return act_tc_virus_12b;
+    else if (dialog === '22b')
+        return act_tc_virus_22b;
+    else if (dialog === '1Moot_BR-e1')
+        return act_tc_jus_1Moot_BR_e1;
+    else
+        return invalid_dialog;
+}
+
+function* act_tc_virus_1(message, state, response, responseSystem) {
     if (!state.baseState) {
         yield responseSystem("EMU Agent hat den Chat betreten.");
         yield response("Hey!");
@@ -37,7 +72,7 @@ export function* act_tc_virus_1(message, state, response, responseSystem) {
     }
 }
 
-export function* act_tc_virus_2(message, state, response, responseSystem) {
+function* act_tc_virus_2(message, state, response, responseSystem) {
     if (!state.baseState) {
         if (message.toLowerCase().includes("posten")) {
             yield response("Einen Posten suchst du?");
@@ -66,7 +101,7 @@ export function* act_tc_virus_2(message, state, response, responseSystem) {
     }
 }
 
-export function* act_tc_virus_21a(message, state, response, responseSystem) {
+function* act_tc_virus_21a(message, state, response, responseSystem) {
     if (!state.baseState) {
         yield responseSystem("EMU Agent hat den Chat betreten.");
         yield response("Hey!");
@@ -105,7 +140,7 @@ export function* act_tc_virus_21a(message, state, response, responseSystem) {
     }
 }
 
-export function* act_tc_virus_33a(message, state, response, responseSystem) {
+function* act_tc_virus_33a(message, state, response, responseSystem) {
     if (!state.baseState) {
         yield responseSystem("EMU Agent hat den Chat betreten.");
         yield response("Hey!");
@@ -145,7 +180,7 @@ export function* act_tc_virus_33a(message, state, response, responseSystem) {
 }
 
 
-export function* act_tc_virus_44a(message, state, response, responseSystem) {
+function* act_tc_virus_44a(message, state, response, responseSystem) {
     if (!state.baseState) {
         yield responseSystem("EMU Agent hat den Chat betreten.");
         yield response("Hey!");
@@ -184,7 +219,7 @@ export function* act_tc_virus_44a(message, state, response, responseSystem) {
     }
 }
 
-export function* act_tc_virus_55a(message, state, response, responseSystem) {
+function* act_tc_virus_55a(message, state, response, responseSystem) {
     if (!state.baseState) {
         yield responseSystem("EMU Agent hat den Chat betreten.");
         yield response("Hey!");
@@ -223,13 +258,13 @@ export function* act_tc_virus_55a(message, state, response, responseSystem) {
     }
 }
 
-export function* act_tc_invalid_dialog(message, state, response, responseSystem) {
+function* act_tc_invalid_dialog(message, state, response, responseSystem) {
     yield responseSystem("Invalid dialog");
 }
 
 
 
-export function* act_tc_virus_e1(message, state, response, responseSystem) {
+function* act_tc_virus_e1(message, state, response, responseSystem) {
     if (!state.baseState) {
         yield responseSystem("EMU agent has entered the chat.");
         yield response("Hey!");
@@ -268,7 +303,7 @@ export function* act_tc_virus_e1(message, state, response, responseSystem) {
     }
 }
 
-export function* act_tc_virus_e2(message, state, response, responseSystem) {
+function* act_tc_virus_e2(message, state, response, responseSystem) {
     if (!state.baseState) {
         if (message.toLowerCase().includes("post")) {
             yield response("You are looking for a post?");
@@ -298,7 +333,7 @@ export function* act_tc_virus_e2(message, state, response, responseSystem) {
     }
 }
 
-export function* act_tc_virus_e21a(message, state, response, responseSystem) {
+function* act_tc_virus_e21a(message, state, response, responseSystem) {
     if (!state.baseState) {
         yield responseSystem("EMU agent has entered the chat.");
         yield response("Hey!");
@@ -337,7 +372,7 @@ export function* act_tc_virus_e21a(message, state, response, responseSystem) {
     }
 }
 
-export function* act_tc_virus_e33a(message, state, response, responseSystem) {
+function* act_tc_virus_e33a(message, state, response, responseSystem) {
     if (!state.baseState) {
         yield responseSystem("EMU agent has entered the chat.");
         yield response("Hey!");
@@ -376,7 +411,7 @@ export function* act_tc_virus_e33a(message, state, response, responseSystem) {
     }
 }
 
-export function* act_tc_virus_e44a(message, state, response, responseSystem) {
+function* act_tc_virus_e44a(message, state, response, responseSystem) {
     if (!state.baseState) {
         yield responseSystem("EMU agent has entered the chat.");
         yield response("Hey!");
@@ -415,7 +450,7 @@ export function* act_tc_virus_e44a(message, state, response, responseSystem) {
     }
 }
 
-export function* act_tc_virus_e55a(message, state, response, responseSystem) {
+function* act_tc_virus_e55a(message, state, response, responseSystem) {
     if (!state.baseState) {
         yield responseSystem("EMU agent has entered the chat.");
         yield response("Hey!");
@@ -454,7 +489,7 @@ export function* act_tc_virus_e55a(message, state, response, responseSystem) {
     }
 }
 
-export function* act_tc_virus_12b(message, state, response, responseSystem) {
+function* act_tc_virus_12b(message, state, response, responseSystem) {
     if (!state.baseState) {
         if (message.toLowerCase().includes("posten")) {
             yield response("Einen Posten suchst du?");
@@ -484,7 +519,7 @@ export function* act_tc_virus_12b(message, state, response, responseSystem) {
     }
 }
 
-export function* act_tc_virus_22b(message, state, response, responseSystem) {
+function* act_tc_virus_22b(message, state, response, responseSystem) {
     if (!state.baseState) {
         if (message.toLowerCase().includes("posten")) {
             yield response("Einen Posten suchst du?");
@@ -553,6 +588,6 @@ function* act_tc_jus_base_1(message, state, response, responseSystem, parting1, 
     }
 }
 
-export function* act_tc_jus_1Moot_BR_e1(message, state, response, responseSystem) {
+function* act_tc_jus_1Moot_BR_e1(message, state, response, responseSystem) {
     yield* act_tc_jus_base_1(message, state, response, responseSystem, "Dann schau mal rüber zum Elektronischen Kommunikationsterminal im Moot Court Room (RESOWI, Bauteil B, Erdgeschloss)", "Aber achte UNBEDINGT auf die richtige Seriennummer: #11689");
 }

@@ -9,12 +9,7 @@ import Input from "./components/Input";
 import API from "./ChatbotAPI";
 import SystemMessage from "./components/SystemMessage";
 import { useSearchParams } from 'next/navigation'
-import { 
-  act_tc_virus_1, act_tc_virus_2, act_tc_virus_21a, act_tc_virus_33a, act_tc_virus_44a, act_tc_virus_55a, 
-  act_tc_invalid_dialog,
-  act_tc_virus_e1, act_tc_virus_e2, act_tc_virus_e21a, act_tc_virus_e33a, act_tc_virus_e44a, act_tc_virus_e55a, 
-  act_tc_virus_12b, act_tc_virus_22b, act_tc_jus_1Moot_BR_e1
- } from './Bots'
+import { act_tc_invalid_dialog } from './Bots'
 
 function* interact(userMessage, chatbotState, setChatbotState, act) {
     let newChatbotState = chatbotState;
@@ -35,37 +30,7 @@ export default function Chatbot() {
   const searchParams = useSearchParams();
   const dialog = searchParams.get('dialog') ?? '';
 
-  let act = act_tc_invalid_dialog;
-  if (dialog === 'avir')
-    act = act_tc_virus_1;
-  else if (dialog === 'bvir')
-    act = act_tc_virus_2;
-  else if (dialog === '21a')
-    act = act_tc_virus_21a;
-  else if (dialog === '33a')
-    act = act_tc_virus_33a;
-  else if (dialog === '44a')
-    act = act_tc_virus_44a;
-  else if (dialog === '55a')
-    act = act_tc_virus_55a;
-  else if (dialog === 'e1')
-    act = act_tc_virus_e1;
-  else if (dialog === 'e2')
-    act = act_tc_virus_e2;
-  else if (dialog === 'e21a')
-    act = act_tc_virus_e21a;
-  else if (dialog === 'e33a')
-    act = act_tc_virus_e33a;
-  else if (dialog === 'e44a')
-    act = act_tc_virus_e44a;
-  else if (dialog === 'e55a')
-    act = act_tc_virus_e55a;
-  else if (dialog === '12b')
-    act = act_tc_virus_12b;
-  else if (dialog === '22b')
-    act = act_tc_virus_22b;
-  else if (dialog === '1Moot_BR-e1')
-    act = act_tc_jus_1Moot_BR_e1;
+  const act = pick_dialog(dialog, act_tc_invalid_dialog);
   
   let english = false;
   if (dialog.startsWith('e'))
