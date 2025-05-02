@@ -9,7 +9,7 @@ import Input from "./components/Input";
 import API from "./ChatbotAPI";
 import SystemMessage from "./components/SystemMessage";
 import { useSearchParams } from 'next/navigation'
-import { act_tc_invalid_dialog } from './Bots'
+import { pick_dialog } from './Bots'
 
 function* interact(userMessage, chatbotState, setChatbotState, act) {
     let newChatbotState = chatbotState;
@@ -30,7 +30,7 @@ export default function Chatbot() {
   const searchParams = useSearchParams();
   const dialog = searchParams.get('dialog') ?? '';
 
-  const act = pick_dialog(dialog, act_tc_invalid_dialog);
+  const act = pick_dialog(dialog);
   
   let english = false;
   if (dialog.startsWith('e'))
