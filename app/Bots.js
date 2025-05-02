@@ -554,5 +554,5 @@ function* act_tc_jus_base_1(message, state, response, responseSystem, parting1, 
 }
 
 export function* act_tc_jus_1Moot_BR_e1(message, state, response, responseSystem) {
-    yield* act_tc_jus_base_1.bind(message, state, response, responseSystem, "Dann schau mal rüber zum Elektronischen Kommunikationsterminal im Moot Court Room (RESOWI, Bauteil B, Erdgeschloss)", "Aber achte UNBEDINGT auf die richtige Seriennummer: #11689");
+    yield* act_tc_jus_base_1(message, state, response, responseSystem, "Dann schau mal rüber zum Elektronischen Kommunikationsterminal im Moot Court Room (RESOWI, Bauteil B, Erdgeschloss)", "Aber achte UNBEDINGT auf die richtige Seriennummer: #11689");
 }
