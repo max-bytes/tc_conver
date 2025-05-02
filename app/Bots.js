@@ -513,3 +513,44 @@ export function* act_tc_virus_22b(message, state, response, responseSystem) {
         yield response("Error: unknown state...", {});
     }
 }
+
+
+function* act_tc_jus_base_1(message, state, response, responseSystem, parting1, parting2) {
+    if (!state.baseState) {
+        yield responseSystem("EMU Agent hat den Chat betreten.");
+        yield response("Hey!");
+        yield response("Was machst du noch online? Die Mission läuft!");
+        yield response("Wer bist du??");
+        yield response("Was ist deine ID?", {baseState: 'your_id'});
+    } else if (state.baseState === 'your_id') {
+        if (message.toLowerCase().includes("850501")) {
+            yield response("Ok, ich schätze mal, du bist beim letzten Trupp dabei, der die Spuren verwischt, ja?", {baseState: 'traces', angerLevel: 0});
+        } else {
+            if (!state.angerLevel)
+                yield response("Nein, deine ID will ich!", {angerLevel: 1});
+            else if (state.angerLevel === 1)
+                yield response("Jetzt sag schon, keine Zeit für Scherze!", {angerLevel: 2});
+            else
+                yield response("Langsam verlier ich die Geduld… Was ist deine ID???", {angerLevel: 0});
+        }
+    } else if (state.baseState === 'traces') {
+        var yesRegex = new RegExp(['ja', 'yes', 'ok'].join( "|" ), "i");
+        if (yesRegex.test(message) || message === 'j' || message === 'k' || message === 'y') {
+            yield response("Passt gut.");
+            yield response(parting1);
+            yield response(parting2, {baseState: 'parting', angerLevel: 0});
+            yield responseSystem("EMU Agent hat den Chat verlassen.");
+        } else {
+            if (!state.angerLevel)
+                yield response("Das ist dein Job, oder?", {angerLevel: 1});
+            else
+                yield response("Jetzt sag schon!; Ja oder nein?", {angerLevel: 0});
+        }
+    } else if (state.baseState === 'parting') {
+        // yield response("Keine Antwort...", {});
+    } else {
+        yield response("Error: unknown state...", {});
+    }
+}
+
+export const act_tc_jus_1Moot_BR_e1 = act_tc_jus_base_1.bind(undefined, undefined, undefined, undefined, "Dann schau mal rüber zum Elektronischen Kommunikationsterminal im Moot Court Room (RESOWI, Bauteil B, Erdgeschloss)", "Aber achte UNBEDINGT auf die richtige Seriennummer: #11689");

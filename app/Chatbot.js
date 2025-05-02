@@ -13,7 +13,7 @@ import {
   act_tc_virus_1, act_tc_virus_2, act_tc_virus_21a, act_tc_virus_33a, act_tc_virus_44a, act_tc_virus_55a, 
   act_tc_invalid_dialog,
   act_tc_virus_e1, act_tc_virus_e2, act_tc_virus_e21a, act_tc_virus_e33a, act_tc_virus_e44a, act_tc_virus_e55a, 
-  act_tc_virus_12b, act_tc_virus_22b,
+  act_tc_virus_12b, act_tc_virus_22b, act_tc_jus_1Moot_BR_e1
  } from './Bots'
 
 function* interact(userMessage, chatbotState, setChatbotState, act) {
@@ -64,6 +64,8 @@ export default function Chatbot() {
     act = act_tc_virus_12b;
   else if (dialog === '22b')
     act = act_tc_virus_22b;
+  else if (dialog === '1Moot_BR-e1')
+    act = act_tc_jus_1Moot_BR_e1;
   
   let english = false;
   if (dialog.startsWith('e'))
