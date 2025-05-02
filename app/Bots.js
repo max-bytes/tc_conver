@@ -38,6 +38,13 @@ export function pick_dialog(dialog) {
         return act_tc_jus_1Institut_BR_h2;
     else if (dialog === '2Institut_BR-h1')
         return act_tc_jus_2Institut_BR_h1;
+    else if (dialog === '2Moot_BR-e1')
+        return act_tc_jus_2Moot_BR_e1;
+    else if (dialog === '2Institut_BR-h2')
+        return act_tc_jus_2Institut_BR_h2;
+    else if (dialog === '2Moot_BR-e2')
+        return act_tc_jus_2Moot_BR_e2;
+    
     else
         return act_tc_invalid_dialog;
 }
@@ -646,4 +653,13 @@ function* act_tc_jus_base_2(message, state, response, responseSystem, parting1, 
 
 function* act_tc_jus_2Institut_BR_h1(message, state, response, responseSystem) {
     yield* act_tc_jus_base_2(message, state, response, responseSystem, "Na gut, dann schau mal rüber zum Elektronischen Kommunikationsterminal im Institut für Öffentliches Recht und Politikwissenschaft (RESOWI, Bauteil C, 3. Stock)", "Aber achte UNBEDINGT auf die richtige Seriennummer: #55697");
+}
+function* act_tc_jus_2Moot_BR_e1(message, state, response, responseSystem) {
+    yield* act_tc_jus_base_2(message, state, response, responseSystem, "Na gut, dann schau mal rüber zum Elektronischen Kommunikationsterminal im Moot Court Room (RESOWI, Bauteil B, Erdgeschloss)", "Aber achte UNBEDINGT auf die richtige Seriennummer: #11689");
+}
+function* act_tc_jus_2Institut_BR_h2(message, state, response, responseSystem) {
+    yield* act_tc_jus_base_2(message, state, response, responseSystem, "Na gut, dann schau mal rüber zum Elektronischen Kommunikationsterminal im Institut für Öffentliches Recht und Politikwissenschaft (RESOWI, Bauteil C, 3. Stock)", "Aber achte UNBEDINGT auf die richtige Seriennummer: #77521");
+}
+function* act_tc_jus_2Moot_BR_e2(message, state, response, responseSystem) {
+    yield* act_tc_jus_base_2(message, state, response, responseSystem, "Na gut, dann schau mal rüber zum Elektronischen Kommunikationsterminal im Moot Court Room (RESOWI, Bauteil B, Erdgeschloss)", "Aber achte UNBEDINGT auf die richtige Seriennummer: #33741");
 }
