@@ -44,7 +44,6 @@ export function pick_dialog(dialog) {
         return act_tc_jus_2Institut_BR_h2;
     else if (dialog === '2Moot_BR-e2')
         return act_tc_jus_2Moot_BR_e2;
-    
     else
         return act_tc_invalid_dialog;
 }
@@ -627,7 +626,7 @@ function* act_tc_jus_base_2(message, state, response, responseSystem, parting1, 
             yield response("Ein elektronisches Kommunikationsterminal suchst du?");
             yield response("Kommst mir verdächtig vor… Weiß nicht, ob ich dir trauen kann");
             yield response("Ich werd dich mal testen");
-            yield response("Wenn du einer von uns bist, musst du ja die Anwort auf das alte Rätsel kennen, mit dem der Boss immer die Neulinge testet");
+            yield response("Wenn du einer von uns bist, musst du ja die Antwort auf das alte Rätsel kennen, mit dem der Boss immer die Neulinge testet");
             yield response("\"Muss Tag und Nacht auf Wache stehn, hat keine Füße und muss doch gehn, hat keine Hände und muss doch schlagen - Wer kann mir dieses Rätsel sagen?\"", {baseState: 'posten', angerLevel: 0});
         } else {
             yield responseSystem("Keine Antwort. Versuche es mit einer anderen Nachricht!");
