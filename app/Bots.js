@@ -603,7 +603,7 @@ function* act_tc_jus_base_1(message, state, response, responseSystem, parting1, 
 }
 
 function* act_tc_jus_1Moot_BR_e1(message, state, response, responseSystem) {
-    yield* act_tc_jus_base_1(message, state, response, responseSystem, "Dann schau mal rüber zum Elektronischen Kommunikationsterminal im Moot Court Room (RESOWI, Bauteil B, Erdgeschloss)", "Aber achte UNBEDINGT auf die richtige Seriennummer: #11689");
+    yield* act_tc_jus_base_1(message, state, response, responseSystem, "Dann schau mal rüber zum Elektronischen Kommunikationsterminal gegenüber vom Moot Court Room (RESOWI, Bauteil B, Erdgeschloss)", "Aber achte UNBEDINGT auf die richtige Seriennummer: #11689");
 }
 
 function* act_tc_jus_1Institut_BR_h1(message, state, response, responseSystem) {
@@ -611,7 +611,7 @@ function* act_tc_jus_1Institut_BR_h1(message, state, response, responseSystem) {
 }
 
 function* act_tc_jus_1Moot_BR_e2(message, state, response, responseSystem) {
-    yield* act_tc_jus_base_1(message, state, response, responseSystem, "Dann schau mal rüber zum Elektronischen Kommunikationsterminal im Moot Court Room (RESOWI, Bauteil B, Erdgeschloss)", "Aber achte UNBEDINGT auf die richtige Seriennummer: #33741");
+    yield* act_tc_jus_base_1(message, state, response, responseSystem, "Dann schau mal rüber zum Elektronischen Kommunikationsterminal gegenüber vom Moot Court Room (RESOWI, Bauteil B, Erdgeschloss)", "Aber achte UNBEDINGT auf die richtige Seriennummer: #33741");
 }
 
 function* act_tc_jus_1Institut_BR_h2(message, state, response, responseSystem) {
@@ -654,11 +654,11 @@ function* act_tc_jus_2Institut_BR_h1(message, state, response, responseSystem) {
     yield* act_tc_jus_base_2(message, state, response, responseSystem, "Na gut, dann schau mal rüber zum Elektronischen Kommunikationsterminal im Institut für Öffentliches Recht und Politikwissenschaft (RESOWI, Bauteil C, 3. Stock)", "Aber achte UNBEDINGT auf die richtige Seriennummer: #55697");
 }
 function* act_tc_jus_2Moot_BR_e1(message, state, response, responseSystem) {
-    yield* act_tc_jus_base_2(message, state, response, responseSystem, "Na gut, dann schau mal rüber zum Elektronischen Kommunikationsterminal im Moot Court Room (RESOWI, Bauteil B, Erdgeschloss)", "Aber achte UNBEDINGT auf die richtige Seriennummer: #11689");
+    yield* act_tc_jus_base_2(message, state, response, responseSystem, "Na gut, dann schau mal rüber zum Elektronischen Kommunikationsterminal gegenüber vom Moot Court Room (RESOWI, Bauteil B, Erdgeschloss)", "Aber achte UNBEDINGT auf die richtige Seriennummer: #11689");
 }
 function* act_tc_jus_2Institut_BR_h2(message, state, response, responseSystem) {
     yield* act_tc_jus_base_2(message, state, response, responseSystem, "Na gut, dann schau mal rüber zum Elektronischen Kommunikationsterminal im Institut für Öffentliches Recht und Politikwissenschaft (RESOWI, Bauteil C, 3. Stock)", "Aber achte UNBEDINGT auf die richtige Seriennummer: #77521");
 }
 function* act_tc_jus_2Moot_BR_e2(message, state, response, responseSystem) {
-    yield* act_tc_jus_base_2(message, state, response, responseSystem, "Na gut, dann schau mal rüber zum Elektronischen Kommunikationsterminal im Moot Court Room (RESOWI, Bauteil B, Erdgeschloss)", "Aber achte UNBEDINGT auf die richtige Seriennummer: #33741");
+    yield* act_tc_jus_base_2(message, state, response, responseSystem, "Na gut, dann schau mal rüber zum Elektronischen Kommunikationsterminal gegenüber vom Moot Court Room (RESOWI, Bauteil B, Erdgeschloss)", "Aber achte UNBEDINGT auf die richtige Seriennummer: #33741");
 }
