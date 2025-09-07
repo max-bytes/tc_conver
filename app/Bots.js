@@ -714,7 +714,6 @@ function* act_tc_kja1(message, state, response, responseSystem) {
     yield* act_tc_kja_base(message, state, response, responseSystem, 
         "Na gut, dann pass mal auf...", 
         "Geh zur Adresse Färbergasse 4 und durch den Bogen in den Innenhof...",
-        "Geh zur Adresse Färbergasse 4 und durch den Bogen in den Innenhof...",
         "An der UNTERSEITE der Postkästen solltest du finden, was du suchst!!!",
     );
 }
