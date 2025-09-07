@@ -44,6 +44,14 @@ export function pick_dialog(dialog) {
         return act_tc_jus_2Institut_BR_h2;
     else if (dialog === '2Moot_BR-e2')
         return act_tc_jus_2Moot_BR_e2;
+    else if (dialog === 'kja1')
+        return act_tc_kja1;
+    else if (dialog === 'kja2')
+        return act_tc_kja2;
+    else if (dialog === 'kja3')
+        return act_tc_kja3;
+    else if (dialog === 'kja4')
+        return act_tc_kja4;
     else
         return act_tc_invalid_dialog;
 }
@@ -661,4 +669,79 @@ function* act_tc_jus_2Institut_BR_h2(message, state, response, responseSystem) {
 }
 function* act_tc_jus_2Moot_BR_e2(message, state, response, responseSystem) {
     yield* act_tc_jus_base_2(message, state, response, responseSystem, "Na gut, dann schau mal rüber zum Elektronischen Kommunikationsterminal gegenüber vom Moot Court Room (RESOWI, Bauteil B, Erdgeschloss)", "Aber achte UNBEDINGT auf die richtige Seriennummer: #33741");
+}
+
+
+function* act_tc_kja_base(message, state, response, responseSystem, ...partings) {
+    if (!state.baseState) {
+        yield responseSystem("EMU Agent hat den Chat betreten.");
+        yield response("Hey!");
+        yield response("Was machst du noch online? Die Mission läuft!");
+        yield response("Wer bist du??");
+        yield response("Was ist deine ID?", {baseState: 'your_id'});
+    } else if (state.baseState === 'your_id') {
+        if (message.toLowerCase().includes("850501")) {
+            yield response("Ok, ich schätze mal, du bist beim letzten Trupp dabei, der die Spuren verwischt, ja?", {baseState: 'traces', angerLevel: 0});
+        } else {
+            if (!state.angerLevel)
+                yield response("Nein, deine ID will ich!", {angerLevel: 1});
+            else if (state.angerLevel === 1)
+                yield response("Jetzt sag schon, keine Zeit für Scherze!", {angerLevel: 2});
+            else
+                yield response("Langsam verlier ich die Geduld… Was ist deine ID???", {angerLevel: 0});
+        }
+    } else if (state.baseState === 'traces') {
+        var yesRegex = new RegExp(['ja', 'yes', 'ok'].join( "|" ), "i");
+        if (yesRegex.test(message) || message === 'j' || message === 'k' || message === 'y') {
+            for(let i = 0; i < partings.length; i++) {
+                yield response(partings[i], i === partings.length - 1 ? {baseState: 'parting', angerLevel: 0} : {});
+            }
+            yield responseSystem("EMU Agent hat den Chat verlassen.");
+        } else {
+            if (!state.angerLevel)
+                yield response("Das ist dein Job, oder?", {angerLevel: 1});
+            else
+                yield response("Jetzt sag schon!; Ja oder nein?", {angerLevel: 0});
+        }
+    } else if (state.baseState === 'parting') {
+        // yield response("Keine Antwort...", {});
+    } else {
+        yield response("Error: unknown state...", {});
+    }
+}
+
+function* act_tc_kja1(message, state, response, responseSystem) {
+    yield* act_tc_kja_base(message, state, response, responseSystem, 
+        "Na gut, dann pass mal auf...", 
+        "Geh zur Adresse Färbergasse 4 und durch den Bogen in den Innenhof...",
+        "Geh zur Adresse Färbergasse 4 und durch den Bogen in den Innenhof...",
+        "An der UNTERSEITE der Postkästen solltest du finden, was du suchst!!!",
+    );
+}
+
+function* act_tc_kja2(message, state, response, responseSystem) {
+    yield* act_tc_kja_base(message, state, response, responseSystem, 
+        "Na gut, dann pass mal auf...", 
+        "Geh zur Adresse Färbergasse 4 und dann im Bogen zum Innenhof findest du auf der rechten Seite einen kleinen Tresor!",
+        "Kann sein, dass er gut versteckt ist hinter den Werbeaufstellern, haha",
+        "Du kannst ihn mit 8120 öffnen!",
+    );
+}
+
+function* act_tc_kja3(message, state, response, responseSystem) {
+    yield* act_tc_kja_base(message, state, response, responseSystem, 
+        "Na gut, dann pass mal auf...", 
+        "Auf dem Karmeliterplatz findest du eine grün-weiße Kuh mit Flügeln, haha",
+        "Wenn du davor stehst, siehst du links und rechts davon Skulpturen aus Metall",
+        "An der UNTERSEITE der linken Skulptur solltest du finden, was du suchst!!!",
+    );
+}
+
+function* act_tc_kja4(message, state, response, responseSystem) {
+    yield* act_tc_kja_base(message, state, response, responseSystem, 
+        "Na gut, dann pass mal auf...", 
+        "Auf dem Karmeliterplatz findest du eine grün-weiße Kuh mit Flügeln, haha",
+        "Wenn du davor stehst, siehst du links und rechts davon Skulpturen aus Metall",
+        "An der UNTERSEITE der rechten Skulptur solltest du finden, was du suchst!!!",
+    );
 }
