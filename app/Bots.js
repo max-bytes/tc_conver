@@ -24,6 +24,10 @@ export function pick_dialog(dialog) {
         return act_tc_virus_e44a;
     else if (dialog === 'e55a')
         return act_tc_virus_e55a;
+    else if (dialog === 'e12b')
+        return act_tc_virus_e12b;
+    else if (dialog === 'e22b')
+        return act_tc_virus_e22b;
     else if (dialog === '12b')
         return act_tc_virus_12b;
     else if (dialog === '22b')
@@ -503,6 +507,72 @@ function* act_tc_virus_e55a(message, state, response, responseSystem) {
                 yield response("That's your job, right?", {angerLevel: 1});
             else
                 yield response("Now tell me! Yes or no??", {angerLevel: 0});
+        }
+    } else if (state.baseState === 'parting') {
+        // yield response("Keine Antwort...", {});
+    } else {
+        yield response("Error: unknown state...", {});
+    }
+}
+
+function* act_tc_virus_e12b(message, state, response, responseSystem) {
+    if (!state.baseState) {
+        if (message.toLowerCase().includes("post")) {
+            yield response("You are looking for a post?");
+            yield response("Wow, and I thought none of us is left in the city centre now that the plan is underway.");
+            yield response("Have you secured any posts yet?", {baseState: 'post', angerLevel: 0});
+        } else {
+            yield responseSystem("No answer. Try another message!");
+        }
+    } else if (state.baseState === 'post') {
+        if (message.toLowerCase().includes("tor") ||
+            message.toLowerCase().includes("eis")) {
+            yield response("OK");
+            yield response("Then look over to the post at the fence around the small green area in front of the entrance to Kaiserfeldgasse 29");
+            yield response("There should still be a chemical there as a backup");
+            yield response("The code for the safe is 1122", {baseState: 'parting', angerLevel: 0});
+            yield responseSystem("EMU Agent hat den Chat verlassen.");
+        } else {
+            if (!state.angerLevel)
+                yield response("Need a rough address", {angerLevel: 1});
+            else if (state.angerLevel === 1)
+                yield response("What was the name of the street or square?", {angerLevel: 2});
+            else
+                yield response("You don't even know the street name anymore?!", {angerLevel: 0});
+        }
+    } else if (state.baseState === 'parting') {
+        // yield response("Keine Antwort...", {});
+    } else {
+        yield response("Error: unknown state...", {});
+    }
+}
+
+function* act_tc_virus_e22b(message, state, response, responseSystem) {
+    if (!state.baseState) {
+        if (message.toLowerCase().includes("post")) {
+            yield response("You are looking for a post?");
+            yield response("Wow, and I thought none of us is left in the city centre now that the plan is underway.");
+            yield response("Have you secured any posts yet?", {baseState: 'post', angerLevel: 0});
+        } else {
+            yield responseSystem("No answer. Try another message!");
+        }
+    } else if (state.baseState === 'post') {
+        if (message.toLowerCase().includes("oper") ||
+            message.toLowerCase().includes("hamerling") ||
+            message.toLowerCase().includes("hammer")||
+            message.toLowerCase().includes("corner")) {
+            yield response("OK");
+            yield response("Then secure the chemical at the post at the building at Kalchberggasse 10");
+            yield response("The code for the safe is 4445");
+            yield response("You know, on the window grill to the left of the entrance!", {baseState: 'parting', angerLevel: 0});
+            yield responseSystem("EMU Agent hat den Chat verlassen.");
+        } else {
+            if (!state.angerLevel)
+                yield response("Need a rough address", {angerLevel: 1});
+            else if (state.angerLevel === 1)
+                yield response("What was the name of the street or square?", {angerLevel: 2});
+            else
+                yield response("You don't even know the street name anymore?!", {angerLevel: 0});
         }
     } else if (state.baseState === 'parting') {
         // yield response("Keine Antwort...", {});
