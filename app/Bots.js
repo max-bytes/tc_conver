@@ -56,6 +56,8 @@ export function pick_dialog(dialog) {
         return act_tc_kja3;
     else if (dialog === 'kja4')
         return act_tc_kja4;
+    else if (dialog === 'kja5')
+        return act_tc_kja5;
     else
         return act_tc_invalid_dialog;
 }
@@ -812,5 +814,13 @@ function* act_tc_kja4(message, state, response, responseSystem) {
         "Auf dem Karmeliterplatz findest du eine grün-weiße Kuh mit Flügeln, haha",
         "Wenn du davor stehst, siehst du links und rechts davon Skulpturen aus Metall",
         "An der UNTERSEITE der rechten Skulptur solltest du finden, was du suchst!!!",
+    );
+}
+
+function* act_tc_kja5(message, state, response, responseSystem) {
+    yield* act_tc_kja_base(message, state, response, responseSystem, 
+        "Na gut, dann pass mal auf...", 
+        "Dort wo sich die Häuser Färbergasse 2 und Färbergasse 4 treffen ist eine Blumenvase aus Metall. ",
+        "Dahinter solltest du finden, was du suchst!!!",
     );
 }
