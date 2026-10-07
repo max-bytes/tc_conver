@@ -26,6 +26,8 @@ export function pick_dialog(dialog) {
         return act_tc_virus_e44a;
     else if (dialog === 'e55a')
         return act_tc_virus_e55a;
+    else if (dialog === 'e55aneu')
+        return act_tc_virus_e55aneu;
     else if (dialog === 'e12b')
         return act_tc_virus_e12b;
     else if (dialog === 'e22b')
@@ -543,6 +545,45 @@ function* act_tc_virus_e55a(message, state, response, responseSystem) {
         if (yesRegex.test(message) || message === 'j' || message === 'k' || message === 'y') {
             yield response("OK");
             yield response("Then secure the chemical at the post at the address Kaiserfeldgasse 19!");
+            yield response("The code for the safe is 5556");
+            yield response("You know, on the green fence just by the house number plate", {baseState: 'parting', angerLevel: 0});
+            yield responseSystem("EMU agent has left the chat.");
+        } else {
+            if (!state.angerLevel)
+                yield response("That's your job, right?", {angerLevel: 1});
+            else
+                yield response("Now tell me! Yes or no??", {angerLevel: 0});
+        }
+    } else if (state.baseState === 'parting') {
+        // yield response("Keine Antwort...", {});
+    } else {
+        yield response("Error: unknown state...", {});
+    }
+}
+
+function* act_tc_virus_e55aneu(message, state, response, responseSystem) {
+    if (!state.baseState) {
+        yield responseSystem("EMU agent has entered the chat.");
+        yield response("Hey!");
+        yield response("What are you still doing online? The mission is running!");
+        yield response("Who are you??");
+        yield response("What is your ID?", {baseState: 'your_id'});
+    } else if (state.baseState === 'your_id') {
+        if (message.toLowerCase().includes("850501")) {
+            yield response("Okay, I guess you're with the last squad to cover the tracks, huh?", {baseState: 'traces', angerLevel: 0});
+        } else {
+            if (!state.angerLevel)
+                yield response("No, your ID is what I want!", {angerLevel: 1});
+            else if (state.angerLevel === 1)
+                yield response("Now tell me, no time for jokes!", {angerLevel: 2});
+            else
+                yield response("I'm losing patience… What is your ID???", {angerLevel: 0});
+        }
+    } else if (state.baseState === 'traces') {
+        var yesRegex = new RegExp(['ja', 'yes', 'ok'].join( "|" ), "i");
+        if (yesRegex.test(message) || message === 'j' || message === 'k' || message === 'y') {
+            yield response("OK");
+            yield response("Then secure the chemical at the post at the address Kaiserfeldgasse 15!");
             yield response("The code for the safe is 5556");
             yield response("You know, on the green fence just by the house number plate", {baseState: 'parting', angerLevel: 0});
             yield responseSystem("EMU agent has left the chat.");
